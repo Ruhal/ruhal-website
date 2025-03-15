@@ -18,6 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nodejs_version }}
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
