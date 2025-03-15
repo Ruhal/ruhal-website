@@ -20,17 +20,27 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
+
+      # Set up Node.js with caching for better performance
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # The specific Node.js version
+          cache: 'pnpm' # Cache pnpm dependencies for faster builds
+
+      # Set up pnpm package manager
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-            version: 6 # required pnpm version
+          version: 8 # Ensure you use an updated pnpm version
 
-        #with:
-          #package-manager: npm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-          # path: . # The root location of your Astro project inside the repository. (optional)
-          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+      # Install dependencies using pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      # Build your Astro site
+      - name: Install, build, and upload your site
+        uses: withastro/action@v2
 
   deploy:
     needs: build
@@ -39,6 +49,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Deploy the built site to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
