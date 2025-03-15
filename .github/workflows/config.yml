@@ -21,6 +21,12 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
 
+      # Set up pnpm package manager
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # Ensure you use an updated pnpm version
+
       # Set up Node.js with caching for better performance
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,11 +34,7 @@ jobs:
           node-version: 20 # The specific Node.js version
           cache: 'pnpm' # Cache pnpm dependencies for faster builds
 
-      # Set up pnpm package manager
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8 # Ensure you use an updated pnpm version
+
 
       # Install dependencies using pnpm
       - name: Install dependencies
