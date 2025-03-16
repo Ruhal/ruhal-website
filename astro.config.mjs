@@ -13,7 +13,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'http://www.ruhal.co.uk',
+    site: 'http://test.ruhal.co.uk',
     integrations: [expressiveCode(expressiveCodeOptions), tailwind({
         applyBaseStyles: false
     }), sitemap(), mdx(), icon()],
