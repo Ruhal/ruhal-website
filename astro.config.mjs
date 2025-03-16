@@ -11,7 +11,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'http://ruhal.co.uk',
+    site: 'https://ruhal.co.uk',
     integrations: [expressiveCode(expressiveCodeOptions), tailwind({
         applyBaseStyles: false
     }), sitemap(), mdx(), icon()],
